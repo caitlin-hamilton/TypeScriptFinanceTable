@@ -6,7 +6,7 @@ import {getTableData} from './API';
 
 function App() {
   return (
-    <div><Table /></div>
+    <div><Table getTableData={getTableData}/></div>
   );
 }
 
