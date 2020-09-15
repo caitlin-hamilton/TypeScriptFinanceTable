@@ -2,11 +2,11 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Table from './Table'
-import {getTableData} from './API';
+import {getTableDataFormatted} from './API';
 
 function App() {
   return (
-    <div><Table getTableData={getTableData}/></div>
+    <div><Table getTableData={getTableDataFormatted}/></div>
   );
 }
 

@@ -4,7 +4,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import InputRow from './InputRow'
 import {ASSET_CLASS_SORT_ORDER} from './config'
 
-// make this enum
 
 interface ArrowLogic {
   [index: string]: any ;
