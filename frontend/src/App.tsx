@@ -1,12 +1,11 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import Table from './Table'
-import {getTableDataFormatted} from './API';
+import {getTableData} from './API';
 
 function App() {
   return (
-    <div><Table getTableData={getTableDataFormatted}/></div>
+    <div><Table getTableData={getTableData}/></div>
   );
 }
 

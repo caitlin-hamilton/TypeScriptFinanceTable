@@ -3,6 +3,7 @@ import HeaderSpecialColumn from './Header';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import InputRow from './InputRow'
 import {ASSET_CLASS_SORT_ORDER} from './config'
+import {ItemData} from './API'
 
 
 interface ArrowLogic {
@@ -14,11 +15,11 @@ interface ArrowLogic {
 
 interface State {
   arrowLogic: ArrowLogic;
-  inputData: any
+  inputData: ItemData[]
 };
 
 interface Props {
-  getTableData: any
+  getTableData: () => ItemData[]
 }
 
 export default class Table extends React.Component<Props, State> {
@@ -47,7 +48,8 @@ export default class Table extends React.Component<Props, State> {
   }
 
   sortAttributeDescendingOrder = (attribute: string) => {
-    let data = [].concat(this.state.inputData).sort((a: any, b: any) => a[attribute] >= b[attribute] ? 1 : -1)
+
+    let data = this.state.inputData.sort((a: ItemData[typeof attribute], b: ItemData[typeof attribute]) => a[attribute] >= b[attribute] ? 1 : -1)
     this.setState({
         inputData: data,
         arrowLogic: this.getArrowLogic(attribute, "DOWN"),
@@ -55,7 +57,7 @@ export default class Table extends React.Component<Props, State> {
   }
 
   sortAttributeAscendingOrder = (attribute: string) => {
-    let data = [].concat(this.state.inputData).sort((a: any, b: any) => a[attribute] < b[attribute] ? 1 : -1)
+    let data = this.state.inputData.sort((a: ItemData[typeof attribute], b: ItemData[typeof attribute]) => a[attribute] < b[attribute] ? 1 : -1)
     this.setState({
         inputData: data,
         arrowLogic: this.getArrowLogic(attribute, "UP"),
@@ -64,7 +66,7 @@ export default class Table extends React.Component<Props, State> {
   }
 
   sortAssetClassDescendingOrder = (attribute: string) => {
-    let data = [].concat(this.state.inputData).sort((a: any, b: any) => ASSET_CLASS_SORT_ORDER[a.assetClass] - ASSET_CLASS_SORT_ORDER[b.assetClass])
+    let data = this.state.inputData.sort((a: ItemData[typeof attribute], b: ItemData[typeof attribute]) => ASSET_CLASS_SORT_ORDER[a.assetClass] - ASSET_CLASS_SORT_ORDER[b.assetClass])
     this.setState({
       inputData: data,
       arrowLogic: this.getArrowLogic(attribute, "DOWN"),
@@ -72,7 +74,7 @@ export default class Table extends React.Component<Props, State> {
   }
 
   sortAssetClassAscendingOrder = (attribute: string) => {
-    let data = [].concat(this.state.inputData).sort((a: any, b: any) => ASSET_CLASS_SORT_ORDER[b.assetClass] - ASSET_CLASS_SORT_ORDER[a.assetClass])
+    let data = this.state.inputData.sort((a: ItemData[typeof attribute], b: ItemData[typeof attribute]) => ASSET_CLASS_SORT_ORDER[b.assetClass] - ASSET_CLASS_SORT_ORDER[a.assetClass])
     this.setState({
       inputData: data,
       arrowLogic: this.getArrowLogic(attribute, "UP"),
@@ -116,7 +118,7 @@ export default class Table extends React.Component<Props, State> {
             <HeaderSpecialColumn sortAttribute={() => {this.sortAttribute('ticker')}} attributeName={'ticker'} sortIcon={this.state.arrowLogic['ticker']}/>
           </tr>
         <tbody>
-          {this.state.inputData.map((item: any, index: number) => 
+          {this.state.inputData.map((item: ItemData, index: number) => 
             <InputRow assetClass={item.assetClass} price={item.price} ticker={item.ticker} key={index}/>)}
         </tbody>
         </table>

@@ -12,7 +12,6 @@ interface Props {
 }
 
 const HeaderSpecialColumn: React.FunctionComponent<Props> = (props) => {
-    console.log('hello')
         return (
             <OverlayTrigger 
                 placement="bottom" 
